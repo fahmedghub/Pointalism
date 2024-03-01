@@ -1,0 +1,59 @@
+#importing pygame, random, and sys
+import pygame
+import random
+import sys
+
+#Importing variables
+RED = (255,0,0)
+GREEN = (0,255,0)
+BLUE = (0,0,255)
+insert = sys.argv[1]
+
+#Source image
+si = pygame.image.load(insert)
+
+
+(width,height)= si.get_size()
+
+#Adjusting display size
+surface = pygame.display.set_mode((width*6, height*6))
+
+#Nested loops
+def pointalism():
+
+
+
+    for f in range(width):
+        for j in range(height):
+            (r, g, b,_) = pygame.Surface.get_at(si,(f,j))
+        
+            redcir = int(r/50)
+            greencir = int(g/50)
+            bluecir = int(b/50)
+
+            while redcir>0:
+                randf, randj= (random.randint(f*6, f*6+6)), (random.randint(j*6, j*6+6))
+                pygame.draw.circle(surface,RED,(randf,randj), 1)
+                redcir -=1
+
+            while greencir>0:
+                randf, randj= (random.randint(f*6, f*6+6)), (random.randint(j*6, j*6+6))
+                pygame.draw.circle(surface,GREEN,(randf,randj), 1)
+                greencir -=1
+        
+            while bluecir>0:
+                randf, randj= (random.randint(f*6, f*6+6)), (random.randint(j*6, j*6+6))
+                pygame.draw.circle(surface,BLUE,(randf,randj), 1)
+                bluecir -=1
+
+pointalism()
+
+pygame.display.update()
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    pygame.display.update() 
+pygame.quit()
